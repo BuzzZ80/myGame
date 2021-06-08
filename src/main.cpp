@@ -19,8 +19,11 @@ int main(int argc, const char *argv[]) {
   sprite->yVelocity = 0.0;
 
   sprite->xAcceleration = 0.0;
-  sprite->yAcceleration = 128.0;
+  sprite->yAcceleration = 32;
 
+  sprite->xTerminal = -1;
+  sprite->yTerminal = -1;
+    
   while (running) {
     // Handle events
     SDL_PollEvent(&event);
@@ -31,14 +34,6 @@ int main(int argc, const char *argv[]) {
     }
 
     // Update
-    if (sprite->x > 640) sprite->x = -64;
-    if (sprite->x < -64) sprite->x = 640;
-    if (sprite->y > 640) sprite->y = -64;
-    if (sprite->y < -64) sprite->y = 640;
-
-    if (sprite->y >= 640 - 64) sprite->yVelocity *= -1;
-
-    printf("%f\n", sprite->y);
     sprite->update();
 
     // Render

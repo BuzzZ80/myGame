@@ -17,6 +17,9 @@ class Entity {
     float xAcceleration;
     float yAcceleration;
 
+    int xTerminal;
+    int yTerminal;
+
     void setSprite(int x, int y);
 
     void update();
