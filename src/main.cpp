@@ -34,7 +34,7 @@ int main(int argc, const char *argv[]) {
           keyboard = SDL_GetKeyboardState(nullptr);
           switch (event.key.keysym.sym) {
             case SDLK_w:
-              sprite->yVelocity = -512;
+              sprite->yVelocity = -256;
           }
           break;
 
