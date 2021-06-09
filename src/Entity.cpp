@@ -56,8 +56,8 @@ void Entity::update() {
     this->xVelocity += this->xAcceleration * (deltaTime / 1000.0);
     this->yVelocity += this->yAcceleration * (deltaTime / 1000.0);
 
-    this->xVelocity = ((this->xVelocity < this->xTerminal) || (this->xTerminal < 0)) ? this->xVelocity : this->xTerminal;
-    this->yVelocity = ((this->yVelocity < this->yTerminal) || (this->yTerminal < 0)) ? this->yVelocity : this->yTerminal;
+    this->xVelocity = ((abs (this->xVelocity) < this->xTerminal) || (this->xTerminal < 0)) ? this->xVelocity : this->xTerminal;
+    this->yVelocity = ((abs (this->yVelocity) < this->yTerminal) || (this->yTerminal < 0)) ? this->yVelocity : this->yTerminal;
 
     this->x += this->xVelocity * (deltaTime / 1000.0);
     this->y += this->yVelocity * (deltaTime / 1000.0);
