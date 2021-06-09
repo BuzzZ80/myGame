@@ -5,6 +5,8 @@
 
 class Player : public Entity {
   public:
+    using Entity::Entity;
+
     float movementSpeed;
     float jumpAcceleration;
 
@@ -12,6 +14,6 @@ class Player : public Entity {
 
   private:
     const uint8_t *keyboard;
-}
+};
 
 #endif
