@@ -12,7 +12,7 @@ SDL_Event event;
 
 Window *window = new Window("Demo", 640, 640, 0, 1); 	// Creates game window
 
-Entity *sprite = new Entity(window->renderer, "../assets/player.png", 120, 64, 64, 64, 64, 64);
+Player *sprite = new Player(window->renderer, "../assets/player.png", 120, 64, 64, 64, 64, 64);
 
 int main(int argc, const char *argv[]) {
   if (window->isInitialized()) running = true;

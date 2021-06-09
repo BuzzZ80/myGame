@@ -24,7 +24,7 @@ class Entity {
 
     void update();
     void render(SDL_Renderer *ren);
-  private:
+  protected:
     int lastTime;
 
     int tx, ty;
