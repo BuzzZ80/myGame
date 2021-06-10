@@ -1,7 +1,7 @@
 #ifndef Entity_h
 #define Entity_h
 
-#include <TextureManager.h>
+#include <FileManager.h>
 
 class Entity {
   public:

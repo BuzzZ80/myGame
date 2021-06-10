@@ -2,7 +2,7 @@
 
 // Initialize Entity object
 Entity::Entity(SDL_Renderer *ren, const char* spritesheet, int x, int y, int w, int h, int texW, int texH) {
-  this->spritesheet = TextureManager::loadTexture(spritesheet, ren);
+  this->spritesheet = FileManager::loadTexture(spritesheet, ren);
 
   if (this->spritesheet == NULL) {
     printf("Could not find %s\n", spritesheet);

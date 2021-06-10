@@ -11,7 +11,7 @@ Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
 
   if(!parseFromStream(builder, ifs, &roomData, &errs)) printf("JSON ERROR!");
 
-  this->background = TextureManager::loadTexture(roomData["background"].asCString(), ren);
+  this->background = FileManager::loadTexture(roomData["background"].asCString(), ren);
   player->x = roomData["player"]["x"].asFloat();
   player->y = roomData["player"]["y"].asFloat();
 }
