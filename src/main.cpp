@@ -1,13 +1,16 @@
 #include <Window.h>
 #include <Room.h>
 
+int TIME = SDL_GetTicks();
+int COUNTER = 0;
+
 bool running = false;
 
 Room *thisRoom;
 
 SDL_Event event;
 
-Window *window = new Window("Demo", 640, 640, 0, 1); 	// Creates game window
+Window *window = new Window("Demo", 640, 640, 0, 0); 	// Creates game window
 
 Player *player = new Player(window->renderer, "../assets/player.png", 120, 64, 64, 64, 64, 64);
 
@@ -32,10 +35,13 @@ int main(int argc, const char *argv[]) {
 
     if (player->y > 576) player->setPosition(player->x, 576);
 
-    printf("(%f, %f)\n", player->x, player->y);
+    // printf("(%f, %f)\n", player->x, player->y);
 
     // Render
     thisRoom->render(window->renderer, player);
+
+    if ((SDL_GetTicks() - TIME) >= 1000) { printf("%d\n", COUNTER); COUNTER = 0; TIME = SDL_GetTicks(); }
+    COUNTER++;
   }
 
   return 0;
