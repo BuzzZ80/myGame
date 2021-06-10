@@ -2,7 +2,8 @@
   "background" : "../assets/backgrounds/test.png",
   "player" : 
   {
-    "x" : 64 ,
+    "image" : "../assets/player.png",
+    "x" : 64,
     "y" : 64
   }
 }

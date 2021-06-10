@@ -3,8 +3,10 @@
 Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
   Json::Value roomData;
   std::ifstream ifs;
-  
-  ifs.open(file);
+
+  printf(FileManager::toAbsolute(file));
+
+  ifs.open(FileManager::toAbsolute(file));
 
   Json::CharReaderBuilder builder;
   JSONCPP_STRING errs;

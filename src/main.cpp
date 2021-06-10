@@ -18,7 +18,7 @@ Room *test = new Room("../roomdata/test.json", player, window->renderer);
 
 int main(int argc, const char *argv[]) {
   if (window->isInitialized()) running = true;
-  
+
   thisRoom = test;
 
   player->yAcceleration = 1024.0;
