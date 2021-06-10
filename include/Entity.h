@@ -20,6 +20,7 @@ class Entity {
     int xTerminal;
     int yTerminal;
 
+    void setPosition(float x, float y);
     void setSprite(int x, int y);
 
     void update();

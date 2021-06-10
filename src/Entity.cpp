@@ -7,26 +7,16 @@ Entity::Entity(SDL_Renderer *ren, const char* spritesheet, int x, int y, int w, 
   if (this->spritesheet == NULL) {
     printf("Could not find %s\n", spritesheet);
   }
+ 
+  this->screenRect.w = this->w = w;
+  this->screenRect.h = this->h = h;
 
-  this->x = x;
-  this->y = y;
-  this->w = w;
-  this->h = h;
+  this->spriteRect.w = this->tw = texW;
+  this->spriteRect.h = this->th = texH;
 
-  this->screenRect.x = x;
-  this->screenRect.y = y;
-  this->screenRect.w = w;
-  this->screenRect.h = h;
+  this->setPosition(x, y);
 
-  this->tx = 0;
-  this->ty = 0;
-  this->tw = texW;
-  this->th = texH;
-
-  this->spriteRect.x = 0;
-  this->spriteRect.y = 0;
-  this->spriteRect.w = texW;
-  this->spriteRect.h = texH;
+  this->setSprite(0, 0);
 
   this->xVelocity = 0;
   this->yVelocity = 0;
@@ -44,9 +34,14 @@ Entity::Entity(SDL_Renderer *ren, const char* spritesheet, int x, int y, int w, 
 
 Entity::~Entity() {}
 
+void Entity::setPosition(float x, float y) {
+  this->screenRect.x = this->x = x;
+  this->screenRect.y = this->y = y;
+}
+
 void Entity::setSprite(int x, int y) {
- this->spriteRect.x = x * this->tw;
- this->spriteRect.y = y * this->th;
+ this->tx = x * this->tw;
+ this->ty = y * this->th;
 }
 
 void Entity::update() {

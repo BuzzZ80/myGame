@@ -1,6 +1,5 @@
 #include <Window.h>
-#include <Entity.h>
-// #include <Player.h>
+#include <Player.h>
 
 bool running = false;
 
@@ -13,52 +12,30 @@ SDL_Event event;
 
 Window *window = new Window("Demo", 640, 640, 0, 1); 	// Creates game window
 
-Entity *sprite = new Entity(window->renderer, "../assets/player.png", 120, 64, 64, 64, 64, 64);
+Player *player = new Player(window->renderer, "../assets/player.png", 120, 64, 64, 64, 64, 64);
 
 int main(int argc, const char *argv[]) {
   if (window->isInitialized()) running = true;
+  
+  player->yAcceleration = 1024.0;
+  player->yTerminal = 1024;
+  player->jumpSpeed = 512;  
+  player->keyboard = SDL_GetKeyboardState(nullptr);
 
-  sprite->xVelocity = 0.0;
-  sprite->yVelocity = 0.0;
-
-  sprite->xAcceleration = 0.0;
-  sprite->yAcceleration = 1024.0;
-
-  sprite->xTerminal = -1;
-  sprite->yTerminal = 1024;
-    
   while (running) {
     // Handle events
-    while (SDL_PollEvent(&event)) {
-      switch (event.type) {
-        case SDL_KEYDOWN:
-          keyboard = SDL_GetKeyboardState(nullptr);
-          switch (event.key.keysym.sym) {
-            case SDLK_w:
-              sprite->yVelocity = -256;
-          }
-          break;
-
-        case SDL_KEYUP:
-          keyboard = SDL_GetKeyboardState(nullptr);
-          break;
-
-        case SDL_QUIT:
-          running = false;
-          break;
-      }
-    }
-
-    sprite->xVelocity = (keyboard[SDL_SCANCODE_A] * -256) + (keyboard[SDL_SCANCODE_D] * 256);
-
+    running = player->handleInput(&event) != 'Q';
+    
     // Update
-    sprite->update();
+    player->update();
 
-    if (sprite->y > 500) sprite->y = 500;
+    if (player->y > 576) player->setPosition(player->x, 576);
+
+    printf("(%f, %f)\n", player->x, player->y);
 
     // Render
     SDL_RenderClear(window->renderer);			// Clear window
-    sprite->render(window->renderer);			// Render sprite
+    player->render(window->renderer);			// Render sprite
     SDL_RenderPresent(window->renderer);		// Display
   }
 

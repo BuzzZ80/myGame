@@ -8,11 +8,10 @@ class Player : public Entity {
     using Entity::Entity;
 
     float movementSpeed;
-    float jumpAcceleration;
+    float jumpSpeed;
 
-    void handleInput();
+    char handleInput(SDL_Event *event);
 
-  private:
     const uint8_t *keyboard;
 };
 
