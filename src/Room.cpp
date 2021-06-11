@@ -4,8 +4,6 @@ Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
   Json::Value roomData;
   std::ifstream ifs;
 
-  printf(FileManager::toAbsolute(file));
-
   ifs.open(FileManager::toAbsolute(file));
 
   Json::CharReaderBuilder builder;

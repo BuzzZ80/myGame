@@ -3,7 +3,10 @@
 
 #include <SDL2/SDL_image.h>
 #include <string.h>
+
+#ifdef __linux__
 #include <unistd.h>
+#endif
 
 class FileManager {
   public:
