@@ -36,6 +36,8 @@ class Entity {
   protected:
     int lastTime;
 
+    int lastX, lastY;
+
     SDL_Rect spriteRect, screenRect;
 };
 
