@@ -1,35 +1,8 @@
 #include <Entity.h>
 
 // Initialize Entity object
-Entity::Entity(SDL_Renderer *ren, const char* spritesheet, int x, int y, int w, int h, int texW, int texH) {
-  this->spritesheet = FileManager::loadTexture(spritesheet, ren);
-
-  if (this->spritesheet == NULL) {
-    printf("Could not find %s\n", spritesheet);
-  }
- 
-  this->screenRect.w = this->w = w;
-  this->screenRect.h = this->h = h;
-
-  this->spriteRect.w = this->tw = texW;
-  this->spriteRect.h = this->th = texH;
-
-  this->setPosition(x, y);
-
-  this->setSprite(0, 0);
-
-  this->xVelocity = 0;
-  this->yVelocity = 0;
-
-  this->xTerminal = -1;
-  this->xTerminal = -1;
-
-  this->xAcceleration = 0;
-  this->yAcceleration = 0;
-
+Entity::Entity() {
   this->lastTime = SDL_GetTicks();
-
-  printf("Entity created with spritesheet %s\n", spritesheet);
 }
 
 Entity::~Entity() {}
@@ -72,4 +45,26 @@ void Entity::update() {
 
 void Entity::render(SDL_Renderer *ren) {
   SDL_RenderCopy(ren, spritesheet, &spriteRect, &screenRect);
+}
+
+void Entity::collide(Entity *entity) {
+  // Top / bottom collision
+  if ( (((this->y + this->h) > entity->y) && (this->y < (entity->y + entity->h))) &&
+       (((this->x + this->w) > entity->x) && (this->x < (entity->x + entity->w))) ) {    
+    
+    if (this->yVelocity < 0) this->setPosition(this->x, entity->y + entity->h); // If moving up, move player to the bottom of the platform
+    else this->setPosition(this->x, entity->y - this->h); // If moving down, move player to the top of the platform
+    
+    this->yVelocity = 0;
+  }
+
+  // Side collision
+  if (!(((this->y + this->h) > entity->y) && (this->y < (entity->y + entity->h))) &&
+       (((this->x + this->w) > entity->x) && (this->x < (entity->x + entity->w))) ) {
+  
+    if (this->xVelocity < 0) this->setPosition(entity->x + entity->w, this->y);
+    else this->setPosition(entity->x - this->w, this->y);
+  
+    this->xVelocity=0;
+  }
 }

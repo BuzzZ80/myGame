@@ -5,11 +5,14 @@
 
 class Entity {
   public:
-    Entity(SDL_Renderer *ren, const char* spritesheet, int x, int y, int w, int h, int texW, int texH);
+    Entity();
     ~Entity();
 
     float x, y;
     int w, h;
+
+    int tx, ty;
+    int tw, th;
 
     float xVelocity;
     float yVelocity;
@@ -17,21 +20,22 @@ class Entity {
     float xAcceleration;
     float yAcceleration;
 
-    int xTerminal;
-    int yTerminal;
+    float xTerminal;
+    float yTerminal;
+
+    bool solid;
+
+    SDL_Texture *spritesheet;
 
     void setPosition(float x, float y);
     void setSprite(int x, int y);
 
     void update();
+    void collide(Entity *entity);
     void render(SDL_Renderer *ren);
   protected:
     int lastTime;
 
-    int tx, ty;
-    int tw, th;
-
-    SDL_Texture *spritesheet;
     SDL_Rect spriteRect, screenRect;
 };
 

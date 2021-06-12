@@ -12,7 +12,7 @@ SDL_Event event;
 
 Window *window = new Window("Demo", 640, 640, 0, 0); 	// Creates game window
 
-Player *player = new Player(window->renderer, "../assets/player.png", 120, 64, 64, 64, 64, 64);
+Player *player = new Player();
 
 Room *test = new Room("../roomdata/test.json", player, window->renderer);
 
@@ -21,9 +21,6 @@ int main(int argc, const char *argv[]) {
 
   thisRoom = test;
 
-  player->yAcceleration = 1024.0;
-  player->yTerminal = 1024;
-  player->jumpSpeed = 512;  
   player->keyboard = SDL_GetKeyboardState(nullptr);
 
   while (running) {
@@ -31,7 +28,7 @@ int main(int argc, const char *argv[]) {
     running = player->handleInput(&event) != 'Q';
     
     // Update
-    player->update();
+    thisRoom->update(player);
 
     if (player->y > 576) player->setPosition(player->x, 576);
 

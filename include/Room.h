@@ -10,8 +10,9 @@ class Room {
     Room(const char* file, Player *player, SDL_Renderer *ren);
     ~Room();
 
-    Entity *Platforms[16];
-  
+    Entity *platforms[16];
+ 
+    void update(Player *player);
     void render(SDL_Renderer *ren, Player *player);
 
   protected:

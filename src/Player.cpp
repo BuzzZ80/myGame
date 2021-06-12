@@ -20,7 +20,8 @@ char Player::handleInput(SDL_Event *event) {
         return 'Q';
     }
   }
-  this->xVelocity = (keyboard[SDL_SCANCODE_A] * -256) + (keyboard[SDL_SCANCODE_D] * 256);
+  this->xVelocity = (keyboard[SDL_SCANCODE_A] * (-1 * this->movementSpeed)) +
+    (keyboard[SDL_SCANCODE_D] * this->movementSpeed);
 
   return 0;
 }

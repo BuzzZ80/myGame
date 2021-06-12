@@ -1,9 +1,32 @@
 {
-  "background" : "../assets/backgrounds/test.png",
-  "player" : 
-  {
+  "defaultColor": [255, 255, 255, 0],
+  "background"  : "../assets/backgrounds/test.png",
+
+  "player" : {
     "image" : "../assets/player.png",
-    "x" : 64,
-    "y" : 64
-  }
+    "x"  :  64, "y"  :   64,
+    "w"  :  64, "h"  :   64,
+    "tw" :  64, "th" :   64,
+    "xv" :   0, "yv" :    0,
+    "xa" :   0, "ya" : 1024,
+    "xt" :  -1, "yt" : 1024,
+
+    "ms" : 256, "js" :  512
+  },
+
+  "platformImages" : [
+    "../assets/platforms/platform.png"
+  ],
+
+  "platforms" : [ 
+    {
+      "texture" : 0,
+      "x"  :  16, "y"  :   400,
+      "w"  : 128, "h"  :   32,
+      "tw" : 128, "th" :   32,
+      "xv" :   0, "yv" :    0,
+      "xa" :   0, "ya" :    0,
+      "xt" :  -1, "yt" :   -1
+    }
+  ]
 }
