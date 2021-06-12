@@ -51,13 +51,6 @@ void Entity::collide(Entity *entity) {
   // If player is inside of entity
   if ( (((this->y + this->h) > entity->y) && (this->y < (entity->y + entity->h))) &&
        (((this->x + this->w) > entity->x) && (this->x < (entity->x + entity->w))) ) {    
-    
-    // If the this's bottom was above the entity's top, 
-    // then push this to the top of entity
-    if ((this->lastY + this->h) <= entity->y) {
-      this->setPosition(this->x, entity->y - this->h);
-      this->yVelocity = 0;
-    }
 
     // If this's top was below the entity's bottom,
     // then push this to the bottom of entity
@@ -68,17 +61,25 @@ void Entity::collide(Entity *entity) {
 
     // If this's right side was to the left of the entity, 
     // then push this to the left
-    if ((this->lastX + this->w) <= entity->x) {
+    else if ((this->lastX + this->w) <= entity->x) {
       this->setPosition(entity->x - this->w, this->y);
       this->xVelocity = 0;
     }
 
     // If this's left side was to the right of the entity,
     // then push this to the right 
-    if (this->lastX >= (entity->x + entity->w)) { 
+    else if (this->lastX >= (entity->x + entity->w)) { 
       this->setPosition(entity->x + entity->w, this->y);
       this->xVelocity = 0;
-   }
+    }
+    
+    // If the this's bottom was above the entity's top,
+    // then push this to the top of entity
+    else if ((this->lastY + this->h) <= entity->y) {
+      this->setPosition(this->x, entity->y - this->h);
+      this->yVelocity = 0;
+    }  
+
   }
 
   this->lastX = this->x;

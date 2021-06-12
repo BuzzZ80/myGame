@@ -15,7 +15,7 @@
   },
 
   "platformImages" : [
-    "../assets/platforms/platform.png"
+    "../assets/platform.png"
   ],
 
   "platforms" : [ 
