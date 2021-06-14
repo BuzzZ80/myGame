@@ -9,14 +9,16 @@
 
 class Room {
   public:
-    Room(const char* file, Player *player, SDL_Renderer *ren);
+    Room(Environment *env, const char* file, Player *player);
     ~Room();
 
     Entity *platforms[16];
  
     void update(Player *player);
-    void render(SDL_Renderer *ren, Player *player);
+    void render(Player *player);
 
+    Player *plr;
+    Environment *env;
   protected:
     SDL_Texture *background;
 };

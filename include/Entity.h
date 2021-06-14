@@ -1,11 +1,11 @@
 #ifndef Entity_h
 #define Entity_h
 
-#include <FileManager.h>
+#include <Environment.h>
 
 class Entity {
   public:
-    Entity();
+    Entity(Environment *environment);
     ~Entity();
 
     float x, y;
@@ -27,6 +27,8 @@ class Entity {
 
     SDL_Texture *spritesheet;
 
+    Environment *env;
+
     int lastX, lastY;
 
     void setPosition(float x, float y);
@@ -34,7 +36,7 @@ class Entity {
 
     void update();
     void collide(Entity *entity);
-    void render(SDL_Renderer *ren);
+    void render();
   protected:
     int lastTime;
 

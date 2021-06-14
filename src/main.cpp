@@ -1,4 +1,5 @@
 #include <FileManager.h>
+#include <Camera.h>
 #include <Window.h>
 #include <Entity.h>
 #include <Player.h>
@@ -13,14 +14,15 @@ Room *thisRoom;
 
 SDL_Event event;
 
-Window *window = new Window("Demo", 640, 640, 0, 0); 	// Creates game window
+Camera *camera = new Camera();
+Window *window = new Window("Demo", 640, 640, 0, 1, 0); 	// Creates game window
+Environment *environment = new Environment(window, camera);
 
-Player *player = new Player();
-
-Room *test = new Room("../roomdata/test.json", player, window->renderer);
+Player *player = new Player(environment);
+Room *test = new Room(environment, "../roomdata/test.json", player);
 
 int main(int argc, const char *argv[]) {
-  if (window->isInitialized()) running = true;
+  if (window->renderer != NULL) running = true;
 
   thisRoom = test;
 
@@ -38,7 +40,7 @@ int main(int argc, const char *argv[]) {
     // printf("(%f, %f)\n", player->x, player->y);
 
     // Render
-    thisRoom->render(window->renderer, player);
+    thisRoom->render(player);
 
     if ((SDL_GetTicks() - TIME) >= 1000) { printf("%d\n", COUNTER); COUNTER = 0; TIME = SDL_GetTicks(); }
     COUNTER++;

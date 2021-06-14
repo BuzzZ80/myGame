@@ -6,15 +6,11 @@
 
 class Window {
   public:
-    Window(const char* title, int width, int height, bool fullscreen, bool vsync);
+    Window(const char* title, int width, int height, bool fullscreen, bool resizable, bool vsync);
     ~Window();
 
     SDL_Window *window;
     SDL_Renderer *renderer;
-
-    bool isInitialized();
-  private:
-    bool initialized;
 };
 
 

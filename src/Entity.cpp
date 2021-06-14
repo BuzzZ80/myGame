@@ -1,7 +1,8 @@
 #include <Entity.h>
 
 // Initialize Entity object
-Entity::Entity() {
+Entity::Entity(Environment *environment) {
+  this->env = environment;
   this->lastTime = SDL_GetTicks();
 }
 
@@ -43,8 +44,8 @@ void Entity::update() {
   this->spriteRect.h = this->th;
 }
 
-void Entity::render(SDL_Renderer *ren) {
-  SDL_RenderCopy(ren, spritesheet, &spriteRect, &screenRect);
+void Entity::render() {
+  SDL_RenderCopy(this->env->window->renderer, spritesheet, &spriteRect, &screenRect);
 }
 
 void Entity::collide(Entity *entity) {

@@ -1,6 +1,8 @@
 #include <Room.h>
 
-Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
+Room::Room (Environment *env, const char *file, Player *player) {
+  this->env = env;
+
   Json::Value roomData;
   std::ifstream ifs;
 
@@ -11,15 +13,15 @@ Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
 
   if(!parseFromStream(builder, ifs, &roomData, &errs)) printf("JSON ERROR!");
 
-  SDL_SetRenderDrawColor(ren, 
+  SDL_SetRenderDrawColor(this->env->window->renderer, 
       roomData["defaultColor"][0].asUInt(), 
       roomData["defaultColor"][1].asUInt(), 
       roomData["defaultColor"][2].asUInt(),
       roomData["defaultColor"][3].asUInt());
 
-  this->background = FileManager::loadTexture(roomData["background"].asCString(), ren);
+  this->background = FileManager::loadTexture(roomData["background"].asCString(), this->env->window->renderer);
   
-  player->spritesheet = FileManager::loadTexture(roomData["player"]["image"].asCString(), ren);
+  player->spritesheet = FileManager::loadTexture(roomData["player"]["image"].asCString(), this->env->window->renderer);
   
   player->x = roomData["player"]["x"].asFloat();
   player->y = roomData["player"]["y"].asFloat();
@@ -51,13 +53,13 @@ Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
   static SDL_Texture *platformTextures[4];
   int len = roomData["platformImages"].size();
   for (int i = 0; i < len; i++) {
-    platformTextures[i] = FileManager::loadTexture(roomData["platformImages"][i].asCString(), ren);
+    platformTextures[i] = FileManager::loadTexture(roomData["platformImages"][i].asCString(), this->env->window->renderer);
   }
 
   int i;
   for (i = 0; i < 16; i++) {
     if (not roomData["platforms"][i].isMember("texture")) break;
-    this->platforms[i] = new Entity();
+    this->platforms[i] = new Entity(this->env);
 
     this->platforms[i]->spritesheet = platformTextures[roomData["platforms"][i]["texture"].asUInt()];
 
@@ -100,13 +102,13 @@ void Room::update(Player *player) {
   player->lastY = player->y;
 }
 
-void Room::render(SDL_Renderer *ren, Player *player) {
-  SDL_RenderClear(ren);
-  SDL_RenderCopy(ren, background, NULL, NULL);
-  player->render(ren);
+void Room::render(Player *player) {
+  SDL_RenderClear(this->env->window->renderer);
+  SDL_RenderCopy(this->env->window->renderer, background, NULL, NULL);
+  player->render();
   for (int i = 0; i < 16; i++) {
     if (this->platforms[i] == NULL) break;
-    this->platforms[i]->render(ren);
+    this->platforms[i]->render();
   }
-  SDL_RenderPresent(ren);
+  SDL_RenderPresent(this->env->window->renderer);
 }
