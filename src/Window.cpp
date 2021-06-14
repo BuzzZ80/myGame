@@ -34,8 +34,6 @@ Window::Window(const char* title, int width, int height, bool fullscreen, bool v
   }
 
   SDL_SetRenderDrawColor(this->renderer, 0xFF, 0xFF, 0xFF, 0xFF);		// Sets default color
- 
-  FileManager::updatePath();                                                    // Updates executable path
 
   this->initialized = true;							// Sets init success flag
   printf("Window successfully created.\n");					// Tells user that the init was a success

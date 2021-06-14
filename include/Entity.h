@@ -27,6 +27,8 @@ class Entity {
 
     SDL_Texture *spritesheet;
 
+    int lastX, lastY;
+
     void setPosition(float x, float y);
     void setSprite(int x, int y);
 
@@ -35,8 +37,6 @@ class Entity {
     void render(SDL_Renderer *ren);
   protected:
     int lastTime;
-
-    int lastX, lastY;
 
     SDL_Rect spriteRect, screenRect;
 };

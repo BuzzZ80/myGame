@@ -15,13 +15,31 @@
   },
 
   "platformImages" : [
-    "../assets/platform.png"
+    "../assets/platform.png", "../assets/platforms/platform.png"
   ],
 
   "platforms" : [ 
     {
       "texture" : 0,
-      "x"  : 256, "y"  :   400,
+      "x"  : 512, "y"  :  400,
+      "w"  : 128, "h"  :   32,
+      "tw" : 128, "th" :   32,
+      "xv" :   0, "yv" :    0,
+      "xa" :   0, "ya" :    0,
+      "xt" :  -1, "yt" :   -1
+    },
+    {
+      "texture" : 1,
+      "x"  : 256, "y"  :  500,
+      "w"  : 128, "h"  :   32,
+      "tw" : 128, "th" :   32,
+      "xv" :   0, "yv" :    0,
+      "xa" :   0, "ya" :    0,
+      "xt" :  -1, "yt" :   -1
+    },
+    {
+      "texture" : 1,
+      "x"  : 128, "y"  :  600,
       "w"  : 128, "h"  :   32,
       "tw" : 128, "th" :   32,
       "xv" :   0, "yv" :    0,

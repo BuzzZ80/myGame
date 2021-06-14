@@ -79,9 +79,5 @@ void Entity::collide(Entity *entity) {
       this->setPosition(this->x, entity->y - this->h);
       this->yVelocity = 0;
     }  
-
   }
-
-  this->lastX = this->x;
-  this->lastY = this->y;
 }

@@ -1,4 +1,7 @@
+#include <FileManager.h>
 #include <Window.h>
+#include <Entity.h>
+#include <Player.h>
 #include <Room.h>
 
 int TIME = SDL_GetTicks();

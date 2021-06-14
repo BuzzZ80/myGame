@@ -14,6 +14,10 @@ char Player::handleInput(SDL_Event *event) {
 
       case SDL_KEYUP:
         this->keyboard = SDL_GetKeyboardState(nullptr);
+	switch (event->key.keysym.sym) {
+          case SDLK_w:
+	    this->yVelocity *= -1 * (this->yVelocity < 0) * 0.10; 
+	}
         break;
 
       case SDL_QUIT:

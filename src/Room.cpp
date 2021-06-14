@@ -49,9 +49,9 @@ Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
   player->setSprite(0,0);
 
   static SDL_Texture *platformTextures[4];
-  int len = sizeof(roomData["platformImages"])/sizeof(roomData["platformImages"][0]);
+  int len = roomData["platformImages"].size();
   for (int i = 0; i < len; i++) {
-      platformTextures[i] = FileManager::loadTexture(roomData["platformImages"][i].asCString(), ren);
+    platformTextures[i] = FileManager::loadTexture(roomData["platformImages"][i].asCString(), ren);
   }
 
   int i;
@@ -82,7 +82,7 @@ Room::Room (const char *file, Player *player, SDL_Renderer *ren) {
 
     this->platforms[i]->setSprite(0,0);
   }
-  if (i < '9') this->platforms[i + 1] = NULL;
+  if (i < 15) this->platforms[i + 1] = NULL;
 }
 
 void Room::update(Player *player) {
@@ -96,6 +96,8 @@ void Room::update(Player *player) {
     if (this->platforms[i] == NULL) break;
     player->collide(this->platforms[i]);
   }
+  player->lastX = player->x;
+  player->lastY = player->y;
 }
 
 void Room::render(SDL_Renderer *ren, Player *player) {

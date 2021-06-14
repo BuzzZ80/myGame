@@ -3,7 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include <FileManager.h>
 
 class Window {
   public:

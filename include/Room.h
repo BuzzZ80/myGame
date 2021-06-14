@@ -3,6 +3,8 @@
 
 #include <json/json.h>
 #include <fstream>
+#include <FileManager.h>
+#include <Entity.h>
 #include <Player.h>
 
 class Room {
